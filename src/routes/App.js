@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { HomePage } from "../pages/home/page";
-import { ItemPage } from "../pages/item/page";
+import { DataPage } from "../pages/data/page";
 
 const App = () => {
 
@@ -8,7 +8,7 @@ const App = () => {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<HomePage />}/>
-                <Route path="/items" element={<ItemPage />}/>
+                <Route path="/items" element={<DataPage />}/>
             </Routes>
         </BrowserRouter>
     )

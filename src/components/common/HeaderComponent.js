@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { Collapse, Nav, Navbar, NavbarToggler, NavItem, NavLink } from "reactstrap";
 import { TextLink } from "./TextLink";
+import { useMobileViewDetector } from "./utilities/Window";
 
-const getWidth = () => window.innerWidth 
-|| document.documentElement.clientWidth 
-|| document.body.clientWidth;
 
 export const Header = ({brand, ...props}) => {
     const [open, setOpen] = useState(
@@ -16,14 +14,9 @@ export const Header = ({brand, ...props}) => {
             ) 
         : false
     );
-
-    const [width, setWidth] = useState(getWidth());
-    const resize = () => {
-        setWidth(getWidth());
-    }
+    const isMobile = useMobileViewDetector()
 
     useEffect(() => {
-        window.addEventListener("resize", resize);
 
         let expand = (props.expand) ? 
             (props.expand == "sm" ||
@@ -33,12 +26,7 @@ export const Header = ({brand, ...props}) => {
             ) 
         : false;
 
-
-        setOpen((width < 800) ? false : expand);
-
-        return () => {
-            window.removeEventListener('resize', resize);
-        }
+        setOpen((isMobile) ? false : expand);
     });
 
     return (
